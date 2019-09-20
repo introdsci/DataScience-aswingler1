@@ -1,0 +1,6 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is where I will be documenting what I do in my project
