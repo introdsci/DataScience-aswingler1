@@ -6,6 +6,11 @@ output:
     df_print: paged
 ---
 
+```{R}
+averages <- read_csv("/Users/albertswingler/385/DataScience-aswingler1/averages.csv")
+```
+
+
 ## Abstract
 
 In under 250 words give a brief summary of the project so far.

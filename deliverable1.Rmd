@@ -1,6 +1,19 @@
 ---
-title: "R Notebook"
+title: "Portfolio Project"
+author: Albert Swingler
 output: html_notebook
 ---
 
-This is where I will be documenting what I do in my project
+This is where I will be documenting what I do in my project.
+
+I choose this topic because politics is an important thing in our "democracy". It is especially important to keep track of what polititians say versus what they do in this day and age where it seems like most of them can lie and get away with anything.
+
+```{r}
+
+library("tidyverse")
+library("dplyr")
+
+```
+
+
+imported averages.csv
