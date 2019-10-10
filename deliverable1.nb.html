@@ -1752,21 +1752,111 @@ summary {
 
 <!-- rnb-text-begin -->
 <p>This is where I will be documenting what I do in my project.</p>
-<p>I choose this topic because politics is an important thing in our “democracy”. It is especially important to keep track of what polititians say versus what they do in this day and age where it seems like most of them can lie and get away with anything.</p>
+<ol style="list-style-type: decimal">
+<li><p>Introduction: I choose this topic because politics is an important thing in our “democracy”. It is especially important to keep track of what polititians say versus what they do in this day and age where it seems like most of them can lie and get away with anything.</p></li>
+<li><p>Data set. My data is from FiveThirtyEight and it has information about which congress peoples votes aligned with Trump predictions for how they will vote in the future.</p></li>
+<li><p>Source: This data is from FiveThirtyEight which is a website that gathers data on sports, politics, and economics. This site is widely recognized as being reliable and used as a source by publications like the New York Times.</p></li>
+<li><p>Variables: congress: wheather they are in the 115th congress session (1/17 to 1/19) or 116th (1/19 to 1/21) chamber: if they are in the house or the senate bioguide: votes: How many bills they have voted on agree_pct: The percentage of time they vote for Trumps position predicted_agree: How likely a congressperson is expected to vote with trump based on Trumps 2016 margin net_trump_vote: Trump’s share of votes in the 2016 election in the member’s state or district minus Clinton’s</p></li>
+</ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5saWJyYXJ5KFwidGlkeXZlcnNlXCIpXG5saWJyYXJ5KFwiZHBseXJcIilcblxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5saWJyYXJ5KFwidGlkeXZlcnNlXCIpXG5saWJyYXJ5KFwiZHBseXJcIilcbmxpYnJhcnkoXCJnZ3Bsb3QyXCIpXG5cbmF2ZXJhZ2VzIDwtIHJlYWRfY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2ludHJvZHNjaS9EYXRhU2NpZW5jZS1hc3dpbmdsZXIxL21hc3Rlci9hdmVyYWdlcy5jc3ZcIilcbmBgYCJ9 -->
 <pre class="r"><code>
 library(&quot;tidyverse&quot;)
 library(&quot;dplyr&quot;)
+library(&quot;ggplot2&quot;)
+
+averages &lt;- read_csv(&quot;https://raw.githubusercontent.com/introdsci/DataScience-aswingler1/master/averages.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUGFyc2VkIHdpdGggY29sdW1uIHNwZWNpZmljYXRpb246XG5jb2xzKFxuICBjb25ncmVzcyA9IFx1MDAxYlszMm1jb2xfZG91YmxlKClcdTAwMWJbMzltLFxuICBjaGFtYmVyID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW0sXG4gIGJpb2d1aWRlID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW0sXG4gIGxhc3RfbmFtZSA9IFx1MDAxYlszMW1jb2xfY2hhcmFjdGVyKClcdTAwMWJbMzltLFxuICBzdGF0ZSA9IFx1MDAxYlszMW1jb2xfY2hhcmFjdGVyKClcdTAwMWJbMzltLFxuICBkaXN0cmljdCA9IFx1MDAxYlszMm1jb2xfZG91YmxlKClcdTAwMWJbMzltLFxuICBwYXJ0eSA9IFx1MDAxYlszMW1jb2xfY2hhcmFjdGVyKClcdTAwMWJbMzltLFxuICB2b3RlcyA9IFx1MDAxYlszMm1jb2xfZG91YmxlKClcdTAwMWJbMzltLFxuICBhZ3JlZV9wY3QgPSBcdTAwMWJbMzJtY29sX2RvdWJsZSgpXHUwMDFiWzM5bSxcbiAgcHJlZGljdGVkX2FncmVlID0gXHUwMDFiWzMybWNvbF9kb3VibGUoKVx1MDAxYlszOW0sXG4gIG5ldF90cnVtcF92b3RlID0gXHUwMDFiWzMybWNvbF9kb3VibGUoKVx1MDAxYlszOW1cbilcbiJ9 -->
+<pre><code>Parsed with column specification:
+cols(
+  congress = [32mcol_double()[39m,
+  chamber = [31mcol_character()[39m,
+  bioguide = [31mcol_character()[39m,
+  last_name = [31mcol_character()[39m,
+  state = [31mcol_character()[39m,
+  district = [32mcol_double()[39m,
+  party = [31mcol_character()[39m,
+  votes = [32mcol_double()[39m,
+  agree_pct = [32mcol_double()[39m,
+  predicted_agree = [32mcol_double()[39m,
+  net_trump_vote = [32mcol_double()[39m
+)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudm90ZV9wcmVkaWN0aW9ucyA8LSByZWFkX2NzdihcImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9pbnRyb2RzY2kvRGF0YVNjaWVuY2UtYXN3aW5nbGVyMS9tYXN0ZXIvdm90ZV9wcmVkaWN0aW9ucy5jc3ZcIilcbmBgYCJ9 -->
+<pre class="r"><code>vote_predictions &lt;- read_csv(&quot;https://raw.githubusercontent.com/introdsci/DataScience-aswingler1/master/vote_predictions.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUGFyc2VkIHdpdGggY29sdW1uIHNwZWNpZmljYXRpb246XG5jb2xzKFxuICBjb25ncmVzcyA9IFx1MDAxYlszMm1jb2xfZG91YmxlKClcdTAwMWJbMzltLFxuICBiaWxsX2lkID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW0sXG4gIHJvbGxfaWQgPSBcdTAwMWJbMzFtY29sX2NoYXJhY3RlcigpXHUwMDFiWzM5bSxcbiAgY2hhbWJlciA9IFx1MDAxYlszMW1jb2xfY2hhcmFjdGVyKClcdTAwMWJbMzltLFxuICB2b3RlZF9hdCA9IFx1MDAxYlszMW1jb2xfY2hhcmFjdGVyKClcdTAwMWJbMzltLFxuICBiaW9ndWlkZSA9IFx1MDAxYlszMW1jb2xfY2hhcmFjdGVyKClcdTAwMWJbMzltLFxuICB2b3RlID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW0sXG4gIHRydW1wX3Bvc2l0aW9uID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW0sXG4gIGxhc3RfbmFtZSA9IFx1MDAxYlszMW1jb2xfY2hhcmFjdGVyKClcdTAwMWJbMzltLFxuICBzdGF0ZSA9IFx1MDAxYlszMW1jb2xfY2hhcmFjdGVyKClcdTAwMWJbMzltLFxuICBkaXN0cmljdCA9IFx1MDAxYlszMm1jb2xfZG91YmxlKClcdTAwMWJbMzltLFxuICBwYXJ0eSA9IFx1MDAxYlszMW1jb2xfY2hhcmFjdGVyKClcdTAwMWJbMzltLFxuICBhZ3JlZSA9IFx1MDAxYlszMm1jb2xfZG91YmxlKClcdTAwMWJbMzltLFxuICB5ZXNubyA9IFx1MDAxYlszMm1jb2xfZG91YmxlKClcdTAwMWJbMzltLFxuICBwcmVkaWN0ZWRfcHJvYmFiaWxpdHkgPSBcdTAwMWJbMzJtY29sX2RvdWJsZSgpXHUwMDFiWzM5bVxuKVxuIn0= -->
+<pre><code>Parsed with column specification:
+cols(
+  congress = [32mcol_double()[39m,
+  bill_id = [31mcol_character()[39m,
+  roll_id = [31mcol_character()[39m,
+  chamber = [31mcol_character()[39m,
+  voted_at = [31mcol_character()[39m,
+  bioguide = [31mcol_character()[39m,
+  vote = [31mcol_character()[39m,
+  trump_position = [31mcol_character()[39m,
+  last_name = [31mcol_character()[39m,
+  state = [31mcol_character()[39m,
+  district = [32mcol_double()[39m,
+  party = [31mcol_character()[39m,
+  agree = [32mcol_double()[39m,
+  yesno = [32mcol_double()[39m,
+  predicted_probability = [32mcol_double()[39m
+)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>imported the libraries I’m using and the CSVs</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Modifications to clean up data:</li>
+</ol>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29sbmFtZXMoYXZlcmFnZXMpW2NvbG5hbWVzKGF2ZXJhZ2VzKSA9PSBcInZvdGVzXCJdIDwtIFwibnVtX3ZvdGVzXCJcblxuYGBgIn0= -->
+<pre class="r"><code>colnames(averages)[colnames(averages) == &quot;votes&quot;] &lt;- &quot;num_votes&quot;
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>renaming columns in the tables</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucG9saXRpY2lhbiA8LSB0aWJibGUobGFzdF9uYW1lPWF2ZXJhZ2VzJGxhc3RfbmFtZSwgY29uZ3Jlc3M9YXZlcmFnZXMkY29uZ3Jlc3MsIGNoYW1iZXI9YXZlcmFnZXMkY2hhbWJlciwgbnVtX3ZvdGVzPWF2ZXJhZ2VzJG51bV92b3Rlcywgc3RhdGU9YXZlcmFnZXMkc3RhdGUsIGRpc3RyaWN0PWF2ZXJhZ2VzJGRpc3RyaWN0LCBwYXJ0eT1hdmVyYWdlcyRwYXJ0eSlcblxuYmlsbCA8LXRpYmJsZShiaWxsX2lkPXZvdGVfcHJlZGljdGlvbnMkYmlsbF9pZCwgcm9sbF9pZD12b3RlX3ByZWRpY3Rpb25zJHJvbGxfaWQsIGNvbWdyZXNzPXZvdGVfcHJlZGljdGlvbnMkY29uZ3Jlc3MsIGNoYW1iZXI9dm90ZV9wcmVkaWN0aW9ucyRjaGFtYmVyLCB2b3RlZF9hdD12b3RlX3ByZWRpY3Rpb25zJHZvdGVkX2F0KVxuXG5cbmBgYCJ9 -->
+<pre class="r"><code>politician &lt;- tibble(last_name=averages$last_name, congress=averages$congress, chamber=averages$chamber, num_votes=averages$num_votes, state=averages$state, district=averages$district, party=averages$party)
+
+bill &lt;-tibble(bill_id=vote_predictions$bill_id, roll_id=vote_predictions$roll_id, comgress=vote_predictions$congress, chamber=vote_predictions$chamber, voted_at=vote_predictions$voted_at)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>creating the dataframes. I seperated out the polititians and the bills.</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Data summary with visulizations:</li>
+</ol>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXZlcmFnZXMkc3RhdGUgPC0gYXMuZmFjdG9yKGF2ZXJhZ2VzJHN0YXRlKVxubGV2ZWxzKGF2ZXJhZ2VzJHN0YXRlKVxuXG5hdmdfcGN0X3ZvdGVfYnlfc3RhdGUgPC0gZ2dwbG90KGF2ZXJhZ2VzLCBhZXMoc3RhdGUsIGFncmVlX3BjdCkpICsgZ2VvbV9iYXIoc3RhdD1cImlkZW50aXR5XCIsIHdpZHRoPS4yNSwgY29sb3I9XCJwdXJwbGVcIikgKyAgdGhlbWUoYXhpcy50ZXh0LnggPSBlbGVtZW50X3RleHQoYW5nbGUgPSA0NSkpXG5hdmdfcGN0X3ZvdGVfYnlfc3RhdGVcbmBgYCJ9 -->
+<pre class="r"><code>averages$state &lt;- as.factor(averages$state)
+levels(averages$state)
+
+avg_pct_vote_by_state &lt;- ggplot(averages, aes(state, agree_pct)) + geom_bar(stat=&quot;identity&quot;, width=.25, color=&quot;purple&quot;) +  theme(axis.text.x = element_text(angle = 45))
+avg_pct_vote_by_state</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Trying to visualizw how likely the congresspeople as a whole from each state are to vote with trump</p>
+<ol start="7" style="list-style-type: decimal">
+<li>Research questions to explore: Were congress people who voted strongly with trump in the 115th congress more or less likely to be elected to the 116th congress than people who voted against him before?</li>
+</ol>
+<p>Were senators or house members more likely to vote with Trump?</p>
+<p>Is there a geographical corelation between which states vote with/against Trump? I’m sure there is</p>
 <p>imported averages.csv</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUG9ydGZvbGlvIFByb2plY3QiCmF1dGhvcjogQWxiZXJ0IFN3aW5nbGVyCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KClRoaXMgaXMgd2hlcmUgSSB3aWxsIGJlIGRvY3VtZW50aW5nIHdoYXQgSSBkbyBpbiBteSBwcm9qZWN0LgoKSSBjaG9vc2UgdGhpcyB0b3BpYyBiZWNhdXNlIHBvbGl0aWNzIGlzIGFuIGltcG9ydGFudCB0aGluZyBpbiBvdXIgImRlbW9jcmFjeSIuIEl0IGlzIGVzcGVjaWFsbHkgaW1wb3J0YW50IHRvIGtlZXAgdHJhY2sgb2Ygd2hhdCBwb2xpdGl0aWFucyBzYXkgdmVyc3VzIHdoYXQgdGhleSBkbyBpbiB0aGlzIGRheSBhbmQgYWdlIHdoZXJlIGl0IHNlZW1zIGxpa2UgbW9zdCBvZiB0aGVtIGNhbiBsaWUgYW5kIGdldCBhd2F5IHdpdGggYW55dGhpbmcuCgpgYGB7cn0KCmxpYnJhcnkoInRpZHl2ZXJzZSIpCmxpYnJhcnkoImRwbHlyIikKCmBgYAoKCmltcG9ydGVkIGF2ZXJhZ2VzLmNzdg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUG9ydGZvbGlvIFByb2plY3QiCmF1dGhvcjogQWxiZXJ0IFN3aW5nbGVyCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KClRoaXMgaXMgd2hlcmUgSSB3aWxsIGJlIGRvY3VtZW50aW5nIHdoYXQgSSBkbyBpbiBteSBwcm9qZWN0LgoKMS4gSW50cm9kdWN0aW9uOgpJIGNob29zZSB0aGlzIHRvcGljIGJlY2F1c2UgcG9saXRpY3MgaXMgYW4gaW1wb3J0YW50IHRoaW5nIGluIG91ciAiZGVtb2NyYWN5Ii4gSXQgaXMgZXNwZWNpYWxseSBpbXBvcnRhbnQgdG8ga2VlcCB0cmFjayBvZiB3aGF0IHBvbGl0aXRpYW5zIHNheSB2ZXJzdXMgd2hhdCB0aGV5IGRvIGluIHRoaXMgZGF5IGFuZCBhZ2Ugd2hlcmUgaXQgc2VlbXMgbGlrZSBtb3N0IG9mIHRoZW0gY2FuIGxpZSBhbmQgZ2V0IGF3YXkgd2l0aCBhbnl0aGluZy4KCjIuIERhdGEgc2V0LgpNeSBkYXRhIGlzIGZyb20gRml2ZVRoaXJ0eUVpZ2h0IGFuZCBpdCBoYXMgaW5mb3JtYXRpb24gYWJvdXQgd2hpY2ggY29uZ3Jlc3MgcGVvcGxlcyB2b3RlcyBhbGlnbmVkIHdpdGggVHJ1bXAgcHJlZGljdGlvbnMgZm9yIGhvdyB0aGV5IHdpbGwgdm90ZSBpbiB0aGUgZnV0dXJlLiAKCjMuIFNvdXJjZToKVGhpcyBkYXRhIGlzIGZyb20gRml2ZVRoaXJ0eUVpZ2h0IHdoaWNoIGlzIGEgd2Vic2l0ZSB0aGF0IGdhdGhlcnMgZGF0YSBvbiBzcG9ydHMsIHBvbGl0aWNzLCBhbmQgZWNvbm9taWNzLiBUaGlzIHNpdGUgaXMgd2lkZWx5IHJlY29nbml6ZWQgYXMgYmVpbmcgcmVsaWFibGUgYW5kIHVzZWQgYXMgYSBzb3VyY2UgYnkgcHVibGljYXRpb25zIGxpa2UgdGhlIE5ldyBZb3JrIFRpbWVzLgoKNC4gVmFyaWFibGVzOgpjb25ncmVzczogd2hlYXRoZXIgdGhleSBhcmUgaW4gdGhlIDExNXRoIGNvbmdyZXNzIHNlc3Npb24gKDEvMTcgdG8gMS8xOSkgb3IgMTE2dGggKDEvMTkgdG8gMS8yMSkKY2hhbWJlcjogaWYgdGhleSBhcmUgaW4gdGhlIGhvdXNlIG9yIHRoZSBzZW5hdGUKYmlvZ3VpZGU6CnZvdGVzOiBIb3cgbWFueSBiaWxscyB0aGV5IGhhdmUgdm90ZWQgb24KYWdyZWVfcGN0OiBUaGUgcGVyY2VudGFnZSBvZiB0aW1lIHRoZXkgdm90ZSBmb3IgVHJ1bXBzIHBvc2l0aW9uCnByZWRpY3RlZF9hZ3JlZTogSG93IGxpa2VseSBhIGNvbmdyZXNzcGVyc29uIGlzIGV4cGVjdGVkIHRvIHZvdGUgd2l0aCB0cnVtcCBiYXNlZCBvbiBUcnVtcHMgMjAxNiBtYXJnaW4KbmV0X3RydW1wX3ZvdGU6IFRydW1w4oCZcyBzaGFyZSBvZiB2b3RlcyBpbiB0aGUgMjAxNiBlbGVjdGlvbiBpbiB0aGUgbWVtYmVy4oCZcyBzdGF0ZSBvciBkaXN0cmljdCBtaW51cyBDbGludG9u4oCZcwoKCgoKCmBgYHtyfQoKbGlicmFyeSgidGlkeXZlcnNlIikKbGlicmFyeSgiZHBseXIiKQpsaWJyYXJ5KCJnZ3Bsb3QyIikKCmF2ZXJhZ2VzIDwtIHJlYWRfY3N2KCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vaW50cm9kc2NpL0RhdGFTY2llbmNlLWFzd2luZ2xlcjEvbWFzdGVyL2F2ZXJhZ2VzLmNzdiIpCnZvdGVfcHJlZGljdGlvbnMgPC0gcmVhZF9jc3YoImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9pbnRyb2RzY2kvRGF0YVNjaWVuY2UtYXN3aW5nbGVyMS9tYXN0ZXIvdm90ZV9wcmVkaWN0aW9ucy5jc3YiKQoKYGBgCmltcG9ydGVkIHRoZSBsaWJyYXJpZXMgSSdtIHVzaW5nIGFuZCB0aGUgQ1NWcwoKNS4gTW9kaWZpY2F0aW9ucyB0byBjbGVhbiB1cCBkYXRhOgpgYGB7cn0KY29sbmFtZXMoYXZlcmFnZXMpW2NvbG5hbWVzKGF2ZXJhZ2VzKSA9PSAidm90ZXMiXSA8LSAibnVtX3ZvdGVzIgoKYGBgCnJlbmFtaW5nIGNvbHVtbnMgaW4gdGhlIHRhYmxlcwoKCmBgYHtyfQpwb2xpdGljaWFuIDwtIHRpYmJsZShsYXN0X25hbWU9YXZlcmFnZXMkbGFzdF9uYW1lLCBjb25ncmVzcz1hdmVyYWdlcyRjb25ncmVzcywgY2hhbWJlcj1hdmVyYWdlcyRjaGFtYmVyLCBudW1fdm90ZXM9YXZlcmFnZXMkbnVtX3ZvdGVzLCBzdGF0ZT1hdmVyYWdlcyRzdGF0ZSwgZGlzdHJpY3Q9YXZlcmFnZXMkZGlzdHJpY3QsIHBhcnR5PWF2ZXJhZ2VzJHBhcnR5KQoKYmlsbCA8LXRpYmJsZShiaWxsX2lkPXZvdGVfcHJlZGljdGlvbnMkYmlsbF9pZCwgcm9sbF9pZD12b3RlX3ByZWRpY3Rpb25zJHJvbGxfaWQsIGNvbWdyZXNzPXZvdGVfcHJlZGljdGlvbnMkY29uZ3Jlc3MsIGNoYW1iZXI9dm90ZV9wcmVkaWN0aW9ucyRjaGFtYmVyLCB2b3RlZF9hdD12b3RlX3ByZWRpY3Rpb25zJHZvdGVkX2F0KQoKCmBgYApjcmVhdGluZyB0aGUgZGF0YWZyYW1lcy4gSSBzZXBlcmF0ZWQgb3V0IHRoZSBwb2xpdGl0aWFucyBhbmQgdGhlIGJpbGxzLgoKNi4gRGF0YSBzdW1tYXJ5IHdpdGggdmlzdWxpemF0aW9uczoKYGBge3J9CmF2ZXJhZ2VzJHN0YXRlIDwtIGFzLmZhY3RvcihhdmVyYWdlcyRzdGF0ZSkKbGV2ZWxzKGF2ZXJhZ2VzJHN0YXRlKQoKYXZnX3BjdF92b3RlX2J5X3N0YXRlIDwtIGdncGxvdChhdmVyYWdlcywgYWVzKHN0YXRlLCBhZ3JlZV9wY3QpKSArIGdlb21fYmFyKHN0YXQ9ImlkZW50aXR5Iiwgd2lkdGg9LjI1LCBjb2xvcj0icHVycGxlIikgKyAgdGhlbWUoYXhpcy50ZXh0LnggPSBlbGVtZW50X3RleHQoYW5nbGUgPSA0NSkpCmF2Z19wY3Rfdm90ZV9ieV9zdGF0ZQpgYGAKVHJ5aW5nIHRvIHZpc3VhbGl6dyBob3cgbGlrZWx5IHRoZSBjb25ncmVzc3Blb3BsZSBhcyBhIHdob2xlIGZyb20gZWFjaCBzdGF0ZSBhcmUgdG8gdm90ZSB3aXRoIHRydW1wCgoKNy4gUmVzZWFyY2ggcXVlc3Rpb25zIHRvIGV4cGxvcmU6CldlcmUgY29uZ3Jlc3MgcGVvcGxlIHdobyB2b3RlZCBzdHJvbmdseSB3aXRoIHRydW1wIGluIHRoZSAxMTV0aCBjb25ncmVzcyBtb3JlIG9yIGxlc3MgbGlrZWx5IHRvIGJlIGVsZWN0ZWQgdG8gdGhlIDExNnRoIGNvbmdyZXNzIHRoYW4gcGVvcGxlIHdobyB2b3RlZCBhZ2FpbnN0IGhpbSBiZWZvcmU/CgoKV2VyZSBzZW5hdG9ycyBvciBob3VzZSBtZW1iZXJzIG1vcmUgbGlrZWx5IHRvIHZvdGUgd2l0aCBUcnVtcD8KCklzIHRoZXJlIGEgZ2VvZ3JhcGhpY2FsIGNvcmVsYXRpb24gYmV0d2VlbiB3aGljaCBzdGF0ZXMgdm90ZSB3aXRoL2FnYWluc3QgVHJ1bXA/IEknbSBzdXJlIHRoZXJlIGlzCgoKCgoKCgoKCgoKCgoKCgppbXBvcnRlZCBhdmVyYWdlcy5jc3Y=</div>
 
 
 

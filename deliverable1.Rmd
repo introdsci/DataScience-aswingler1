@@ -6,14 +6,89 @@ output: html_notebook
 
 This is where I will be documenting what I do in my project.
 
+1. Introduction:
 I choose this topic because politics is an important thing in our "democracy". It is especially important to keep track of what polititians say versus what they do in this day and age where it seems like most of them can lie and get away with anything.
+
+2. Data set.
+My data is from FiveThirtyEight and it has information about which congress peoples votes aligned with Trump predictions for how they will vote in the future. 
+
+3. Source:
+This data is from FiveThirtyEight which is a website that gathers data on sports, politics, and economics. This site is widely recognized as being reliable and used as a source by publications like the New York Times.
+
+4. Variables:
+congress: wheather they are in the 115th congress session (1/17 to 1/19) or 116th (1/19 to 1/21)
+chamber: if they are in the house or the senate
+bioguide:
+votes: How many bills they have voted on
+agree_pct: The percentage of time they vote for Trumps position
+predicted_agree: How likely a congressperson is expected to vote with trump based on Trumps 2016 margin
+net_trump_vote: Trump’s share of votes in the 2016 election in the member’s state or district minus Clinton’s
+
+
+
+
 
 ```{r}
 
 library("tidyverse")
 library("dplyr")
+library("ggplot2")
+
+averages <- read_csv("https://raw.githubusercontent.com/introdsci/DataScience-aswingler1/master/averages.csv")
+vote_predictions <- read_csv("https://raw.githubusercontent.com/introdsci/DataScience-aswingler1/master/vote_predictions.csv")
 
 ```
+imported the libraries I'm using and the CSVs
+
+5. Modifications to clean up data:
+```{r}
+colnames(averages)[colnames(averages) == "votes"] <- "num_votes"
+
+```
+renaming columns in the tables
+
+
+```{r}
+politician <- tibble(last_name=averages$last_name, congress=averages$congress, chamber=averages$chamber, num_votes=averages$num_votes, state=averages$state, district=averages$district, party=averages$party)
+
+bill <-tibble(bill_id=vote_predictions$bill_id, roll_id=vote_predictions$roll_id, comgress=vote_predictions$congress, chamber=vote_predictions$chamber, voted_at=vote_predictions$voted_at)
+
+
+```
+creating the dataframes. I seperated out the polititians and the bills.
+
+6. Data summary with visulizations:
+```{r}
+averages$state <- as.factor(averages$state)
+levels(averages$state)
+
+avg_pct_vote_by_state <- ggplot(averages, aes(state, agree_pct)) + geom_bar(stat="identity", width=.25, color="purple") +  theme(axis.text.x = element_text(angle = 45))
+avg_pct_vote_by_state
+```
+Trying to visualizw how likely the congresspeople as a whole from each state are to vote with trump
+
+
+7. Research questions to explore:
+Were congress people who voted strongly with trump in the 115th congress more or less likely to be elected to the 116th congress than people who voted against him before?
+
+
+Were senators or house members more likely to vote with Trump?
+
+Is there a geographical corelation between which states vote with/against Trump? I'm sure there is
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 imported averages.csv
