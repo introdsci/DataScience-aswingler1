@@ -16,7 +16,7 @@ My data is from FiveThirtyEight and it has information about which congress peop
 This data is from FiveThirtyEight which is a website that gathers data on sports, politics, and economics. This site is widely recognized as being reliable and used as a source by publications like the New York Times.
 
 4. Variables:
-congress: wheather they are in the 115th congress session (1/17 to 1/19) or 116th (1/19 to 1/21)
+congress: wheather they are in the 115th congress session (1/17 to 1/19) or 116th (1/19 to 1/21). 0 if both.
 chamber: if they are in the house or the senate
 bioguide:
 votes: How many bills they have voted on
@@ -44,8 +44,13 @@ imported the libraries I'm using and the CSVs
 ```{r}
 colnames(averages)[colnames(averages) == "votes"] <- "num_votes"
 
+averages$party <- substr(averages$party, 0, 1)
 ```
-renaming columns in the tables
+renaming vote columns in the tables.
+
+Truncated the party observations so its only the first letter. Previously some of them had the full spelling.
+
+Honestly it seems really clean already. Struggling to find things to change.
 
 
 ```{r}
@@ -65,7 +70,16 @@ levels(averages$state)
 avg_pct_vote_by_state <- ggplot(averages, aes(state, agree_pct)) + geom_bar(stat="identity", width=.25, color="purple") +  theme(axis.text.x = element_text(angle = 45))
 avg_pct_vote_by_state
 ```
-Trying to visualizw how likely the congresspeople as a whole from each state are to vote with trump
+Visualizing how likely the congress members as a whole from each state are to vote with trump
+
+```{r}
+
+agree_vs_predicted_agree <- ggplot(averages, aes(predicted_agree, agree_pct)) + geom_point(size=2, shape=19, color="#ed5126")
+
+agree_vs_predicted_agree
+
+```
+Visualizing the agree percentage with the predicted agree. As you can see, most congress members voted how they were predicted but there are a few outlers. Several in the bottom right of the graph were predicted to agree over 75% of the time but ended up only agreeing less than 25% of the time
 
 
 7. Research questions to explore:
@@ -76,19 +90,3 @@ Were senators or house members more likely to vote with Trump?
 
 Is there a geographical corelation between which states vote with/against Trump? I'm sure there is
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-imported averages.csv
