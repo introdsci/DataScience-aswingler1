@@ -1,0 +1,33 @@
+---
+title: "Model Planning and Building"
+output: html_notebook
+---
+
+For this phase of the project I want use the the data I scraped from Pew Research Centers website that has the immigration information of congresspeople in the House and the Senate.
+One question I want to answer is weather there is a corelation between a congressperson being a immigrant and their party and how they vote on bills.
+
+115th:
+https://www.pewresearch.org/fact-tank/2018/08/21/immigrants-or-children-of-immigrants-make-up-at-least-12-of-congress/
+
+116th:
+https://www.pewresearch.org/fact-tank/2019/01/24/in-116th-congress-at-least-13-of-lawmakers-are-immigrants-or-the-children-of-immigrants/
+
+
+```{r}
+library("tidyverse")
+library("rvest")
+library("dplyr")
+
+congress115 <- read_html("https://www.pewresearch.org/fact-tank/2018/08/21/immigrants-or-children-of-immigrants-make-up-at-least-12-of-congress/")
+congress116 <- read_html("https://www.pewresearch.org/fact-tank/2019/01/24/in-116th-congress-at-least-13-of-lawmakers-are-immigrants-or-the-children-of-immigrants/")
+
+
+table <- html_nodes(congress115, "tr")
+table <- html_text(table)
+#table <- str_replace_all(table, "\n", " ")
+table <- as_tibble(table)
+table
+
+
+```
+
