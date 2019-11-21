@@ -120,6 +120,7 @@ colnames(politition_with_generation)[colnames(politition_with_generation) == "Na
 #replacing the generation number in politician with the number from politition_with_generation
 
 #which(politician$last_name=="Clarke")
+#gets the row number. had to use since search wont show the actual row number.
 
 politician[4,"generation"]=2
 politician[5,"generation"]=2
@@ -341,10 +342,42 @@ summary(politician)
 
 graphs
 ```{r}
-gen_vs_party <- ggplot(politition_with_generation, aes(generation, Party)) + geom_point()
-gen_vs_trump_agree
+averages <- add_column(averages, politician$generation)
+colnames(averages)[colnames(averages) == "politician$generation"] <- "generation"
+
+
+
+ averages$generation <- as.factor(averages$generation)
+# levels(averages$generation)
+# 
+# averages$agree_pct <- as.factor(averages$agree_pct)
+# levels(averages$agree_pct)
+
+# avg_pct_vote_by_gen <- ggplot(averages, aes(generation, agree_pct)) + geom_bar(stat="identity", width=.5, color="green") + theme(axis.text.x = element_text(angle = 0))
+avg_pct_vote_by_gen <- ggplot(averages, aes(x=generation, y=agree_pct)) + stat_summary(fun.y="mean", geom="bar", color="green")
+avg_pct_vote_by_gen
+```
+
+Here we can see that first generation congresspeople - those who immigrated here themselves, are the least likely to agree with Trump. Third generation congressprople are the most likely to agree with Trump.
+
+
+Models
+```{r}
+#model <- lm(data = politician, formula = generation ~ generation + num_votes)
+
+
+
 
 ```
+
+
+
+
+
+
+
+
+
 
 
 

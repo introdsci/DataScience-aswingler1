@@ -50,7 +50,7 @@ Renaming vote columns in the tables.
 Truncated the party observations so its only the first letter. Previously some of them had the full spelling.
 
 
-
+Added the generation number 3 if they are third generation or higher.
 ```{r}
 politician <- tibble(last_name=averages$last_name, congress=averages$congress, chamber=averages$chamber, num_votes=averages$num_votes, state=averages$state, district=averages$district, party=averages$party)
 
