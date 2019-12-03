@@ -363,7 +363,10 @@ Here we can see that first generation congresspeople - those who immigrated here
 
 Models
 ```{r}
-#model <- lm(data = politician, formula = generation ~ generation + num_votes)
+cor(as.numeric(averages$generation), averages$agree_pct)
+model <- lm(averages$agree_pct ~ as.numeric(averages$generation) + averages$predicted_agree)
+summary(model)
+plot(model)
 
 
 

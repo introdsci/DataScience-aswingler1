@@ -69,19 +69,22 @@ Creating the dataframes. I seperated out the polititians and the bills.
 averages$state <- as.factor(averages$state)
 levels(averages$state)
 
-avg_pct_vote_by_state <- ggplot(averages, aes(state, agree_pct)) + geom_bar(stat="identity", width=.25, color="purple") +  theme(axis.text.x = element_text(angle = 45))
+#averages$agree_pct <- as.factor(averages$agree_pct)
+
+avg_pct_vote_by_state <- ggplot(averages, aes(state, agree_pct)) + geom_bar(stat="identity", width=.25, color="purple") +  theme(axis.text.x = element_text(angle = 45)) + ggtitle("state vs. agree percentage") + ylab("agree percentage")
 avg_pct_vote_by_state
 ```
 Visualizing how likely the congress members as a whole from each state are to vote with trump
 
 ```{r}
 
-agree_vs_predicted_agree <- ggplot(averages, aes(predicted_agree, agree_pct)) + geom_point(size=2, shape=19, color="#ed5126")
+agree_vs_predicted_agree <- ggplot(averages, aes(predicted_agree, agree_pct)) + geom_point(size=2, shape=19, col = ifelse(politician$party == "R", 'red', 'blue')) + ylab("agree percentage") + xlab("predicted agree") + ggtitle("agree percentage vs. predicted agree for all congresspeople")
+  
 
 agree_vs_predicted_agree
 
 ```
-Visualizing the agree percentage with the predicted agree. As you can see, most congress members voted how they were predicted but there are a few outlers. Several in the bottom right of the graph were predicted to agree over 75% of the time but ended up only agreeing less than 25% of the time. I wanted to make the Repulbicans red and Dems blue but can't figure it out
+Visualizing the agree percentage with the predicted agree. As you can see, most congress members voted how they were predicted but there are a few outlers. Several in the bottom right of the graph were predicted to agree over 75% of the time but ended up only agreeing less than 25% of the time. Repubicans are Red and Democrats are blue. Need to get Independants showing as a third color but currently they're showing as blue. Fortunatly there are not very many of them.
 
 
 7. Research questions to explore:
