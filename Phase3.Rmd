@@ -1,0 +1,39 @@
+---
+title: "Results and Operationalization"
+author: Albert Swingler
+output: html_notebook
+---
+
+```{r}
+library("tidyverse")
+library("rvest")
+library("dplyr")
+library("knitr")
+library("caret")
+
+
+purl("deliverable1.Rmd", output = "part1.r") # produces r source from rmd
+purl("phase2.Rmd", output = "part2.r")
+source("part1.r") # executes the source
+source("part2.r")
+
+
+```
+
+Here we are creating a test and training set and using that to predict the likelyhood of a politician to agree with Trump based on what generation they are
+```{r}
+set.seed(333)
+
+index <- createDataPartition(averages$agree_pct, p = 0.75, list = FALSE)
+
+train <- averages[index, ]
+test <- averages[index, ]
+
+trained_model <- lm(train, formula = agree_pct~predicted_agree+generation)
+summary(trained_model)
+
+
+generation_agree_predictions <- predict(trained_model, test)
+ggplot(data=test, aes(generation_agree_predictions, generation)) + geom_point(color='purple')
+
+```
