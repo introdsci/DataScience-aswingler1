@@ -1,6 +1,5 @@
 ---
 title: "Model Planning and Building"
-output: html_notebook
 ---
 
 For this phase of the project I want use the the data I scraped from Pew Research Centers website that has the immigration information of congresspeople in the House and the Senate.
