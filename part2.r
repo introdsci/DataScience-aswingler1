@@ -347,6 +347,18 @@ plot(model)
 
 
 ## ------------------------------------------------------------------------
-head(predict(model, data.frame(generation = 4)))
+set.seed(333)
+
+index <- createDataPartition(averages$agree_pct, p = 0.75, list = FALSE)
+
+train <- averages[index, ]
+test <- averages[index, ]
+
+trained_model <- lm(train, formula = agree_pct~predicted_agree+generation)
+summary(trained_model)
+
+
+generation_agree_predictions <- predict(trained_model, test)
+ggplot(data=test, aes(generation_agree_predictions, generation)) + geom_point(color='purple')
 
 

@@ -397,7 +397,7 @@ generation_agree_predictions <- predict(trained_model, test)
 ggplot(data=test, aes(generation_agree_predictions, generation)) + geom_point(color='purple')
 
 ```
-Here we are creating a test and training set and using that to predict the likelyhood of a politician to agree with Trump based on what generation they are
+Here we are creating a test and training set and using that to predict the likelyhood of a politician to agree with Trump based on what generation they are. I'm not surprised by this data but I think it is still very interesting to see it graphed out. You could definitely use this data to predict how likely a politician is to vote with Trump
 
 
 
