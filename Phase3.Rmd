@@ -2,8 +2,6 @@
 title: "Results and Operationalization"
 author: Albert Swingler
 output: html_notebook
-html_document:
-df_print: paged
 ---
 
 ```{r}
@@ -46,11 +44,7 @@ ggplot(data=test, aes(generation, num_votes)) + geom_point(color='orange')
 
 
 operationalization: 
-I think my analysis of this data is very interesting to know. In the first phase of this project I looked at which states politicians votes align with Trump. States like Texas tend to agree with Trump while states like Vermont almost never do. I think this data is very interesting to see even though it shouldn't be a surprise to anyone who pays attention to United States politics. 
 
-In the second phase of the project I decided to take a look at how each politicians likelyhood to vote for Trumps position is affected by how many generations they have lived in the United States. I proved that first generation immigrants were the least likely to vote with Trump and third generation and later politicians were the most likely to agree with him. It turns out that generation is a good predictor of of their votes.
-
-The information learned from this project can be used to educate voters on weather their representatives in congress are voting for things they want. Although it shouldn't be used exculsively to decide who to vote for, being able to predict how a given politician will vote based on their generation may also be useful information for voters to factor in to their decisions. 
 
 
 

@@ -1,6 +1,6 @@
 ---
-title: " " #replace the title with something short and catchy to represent your project
-subtitle: "____'s Data Science Portfolio" #replace blank with your name
+title: "Predicting Politicians in the age of Trump"
+subtitle: "Albert Swingler's Data Science Portfolio" #replace blank with your name
 output:
   html_document:
     df_print: paged
@@ -8,16 +8,31 @@ output:
 
 ## Abstract
 
-In under 250 words give a brief summary of the project so far.
+For this project I decided to take a look at how politicians vote and used that data to predict their votes based on several facotrs such as their location and how many generations they or their family have been living in the country.
 
 ### 1. Discovery and Data Preparation
 
-Provide a one-sentence introduction with what is covered by the first deliverable along with a link to another html page that gives the details.
+Gathered and cleaned data relating to politicians votes and added graphs to show general trends of wheather politicians vote with Trump.
+
+https://introdsci.github.io/DataScience-aswingler1/deliverable1.nb.html
 
 ### 2. Model Planning and Building
 
-Coming soon...
+For this phased I found data on how many generations each congressperson has been in the country and used that to predict how likely their vote was to align with Trump.
+
+https://introdsci.github.io/DataScience-aswingler1/phase2.nb.html
 
 ### 3. Results and Operationalization
 
 Coming soon...
+
+https://introdsci.github.io/DataScience-aswingler1/Phase3.nb.html
+
+
+
+## Conclusion
+I think my analysis of this data is very interesting to know. In the first phase of this project I looked at which states politicians votes align with Trump. States like Texas tend to agree with Trump while states like Vermont almost never do. I think this data is very interesting to see even though it shouldn't be a surprise to anyone who pays attention to United States politics. 
+
+In the second phase of the project I decided to take a look at how each politicians likelyhood to vote for Trumps position is affected by how many generations they have lived in the United States. I proved that first generation immigrants were the least likely to vote with Trump and third generation and later politicians were the most likely to agree with him. It turns out that generation is a good predictor of of their votes.
+
+The information learned from this project can be used to educate voters on weather their representatives in congress are voting for things they want. Although it shouldn't be used exculsively to decide who to vote for, being able to predict how a given politician will vote based on their generation may also be useful information for voters to factor in to their decisions. 
