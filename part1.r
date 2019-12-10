@@ -2,6 +2,7 @@
 library("tidyverse")
 library("dplyr")
 library("ggplot2")
+library("knitr")
 
 averages <- read_csv("https://raw.githubusercontent.com/introdsci/DataScience-aswingler1/master/averages.csv")
 vote_predictions <- read_csv("https://raw.githubusercontent.com/introdsci/DataScience-aswingler1/master/vote_predictions.csv")

@@ -2,6 +2,8 @@
 title: "Portfolio Project"
 author: Albert Swingler
 output: html_notebook
+html_document:
+df_print: paged
 ---
 
 This is where I will be documenting what I do in my project.
@@ -32,6 +34,7 @@ net_trump_vote: Trump’s share of votes in the 2016 election in the member’s 
 library("tidyverse")
 library("dplyr")
 library("ggplot2")
+library("knitr")
 
 averages <- read_csv("https://raw.githubusercontent.com/introdsci/DataScience-aswingler1/master/averages.csv")
 vote_predictions <- read_csv("https://raw.githubusercontent.com/introdsci/DataScience-aswingler1/master/vote_predictions.csv")

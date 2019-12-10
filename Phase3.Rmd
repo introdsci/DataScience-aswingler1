@@ -2,6 +2,8 @@
 title: "Results and Operationalization"
 author: Albert Swingler
 output: html_notebook
+html_document:
+df_print: paged
 ---
 
 ```{r}
