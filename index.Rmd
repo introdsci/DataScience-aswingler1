@@ -1,5 +1,5 @@
 ---
-title: "Predicting Politicians agreement with Trump"
+title: "Predicting Politicians Agreement with Trump"
 subtitle: "Albert Swingler's Data Science Portfolio"
 output:
   html_document:
