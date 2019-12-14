@@ -21,21 +21,33 @@ source("part2.r")
 ```
 
 
+-Updated my p2 model a lot after the peer review and made it more clear what was being displayed and what it meant
+for my analysis. 
+-Updated the last graph in p1 to show the party of each politician represented. This made the chart much better at showing what I found.
+-Removed unnecessary commented out code and white space
 
+More models. Switched the formula to model predicted agree from the first deliverable data source instead of the actual agree just to see if there was a difference.
 ```{r}
 set.seed(333)
 
-index <- createDataPartition(politician$party, p = 0.75, list = FALSE)
+index <- createDataPartition(averages$agree_pct, p = 0.75, list = FALSE)
 
-train <- politician[index, ]
-test <- politician[index, ]
+train <- averages[index, ]
+test <- averages[index, ]
 
-trained_model <- lm(train, formula = generation~num_votes)
+trained_model <- lm(train, formula = predicted_agree~agree_pct+generation)
 summary(trained_model)
 
 
-generation_party <- predict(trained_model, test)
-ggplot(data=test, aes(generation, num_votes)) + geom_point(color='orange')
+generation_agree_predictions <- predict(trained_model, test)
+ggplot(data=test, aes(generation_agree_predictions, generation)) + geom_point(color='purple') + xlab('generation agree predictions')
+
+
+```
+
+
+Cross-validation
+```{r}
 
 ```
 
@@ -43,7 +55,14 @@ ggplot(data=test, aes(generation, num_votes)) + geom_point(color='orange')
 
 
 
-operationalization: 
+Operationalization: 
+The information learned from this project can be used to educate voters on weather their representatives in congress are voting for things they want. Although it shouldn't be used exculsively to decide who to vote for, being able to predict how a given politician will vote based on their generation may be useful information for voters to factor in to their decisions. 
+
+This data analysis has several imortant social and ethical implications. The information found that the more recent a congressperson and their family immigrated to the United States are much less likely to vote with Trump is good to realize. Knowing this information someone could choose to push for or advocate for one candidate over the other before even hearing what their opinion on the issues is. A media outlet could be more or less willing to urge their viewers to support a particular candidate based on this alone.
+
+The next thing to do for this project would be to continue gathering data and trying to predict votes. Maybe data on things such as politician age or education could be used as predictors. The education idea could potentially have some really interesting results. 
+
+There isn't a ton that can be done on this either as it is. It's no surprise that immigrants are less likely to vote with Trump. No one is able to decide what generation they are like they are with their policy positions so it's possible someone could be judeged one way or the other before being given a chance to express their views. People need to be aware that while ones generation is just one of the many things that contribute to ones political alignment, it is far from the only one.
 
 
 
@@ -52,8 +71,14 @@ operationalization:
 
 
 
+operationaization
+-what next 
+what do we model? data collection, data automation, unintended consequences
 
-
+social impact
+-who it serves/impace
+-social responses
+-ethical dilemmas
 
 
 

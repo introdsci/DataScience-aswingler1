@@ -4,7 +4,6 @@ author: Albert Swingler
 output: html_notebook
 ---
 
-This is where I will be documenting what I do in my project.
 
 1. Introduction:
 I choose this topic because politics is an important thing in our "democracy". It is especially important to keep track of what polititians say versus what they do in this day and age where it seems like most of them can lie and get away with anything.
@@ -17,11 +16,17 @@ This data is from FiveThirtyEight which is a website that gathers data on sports
 
 4. Variables:
 congress: wheather they are in the 115th congress session (1/17 to 1/19) or 116th (1/19 to 1/21). 0 if both.
+
 chamber: if they are in the house or the senate
+
 bioguide: government given alphanumeric ID for each legislator
+
 votes: How many bills they have voted on total.
+
 agree_pct: The percentage of time they vote for Trumps position
+
 predicted_agree: How likely a congressperson is expected to vote with trump based on Trumps 2016 margin
+
 net_trump_vote: Trump’s share of votes in the 2016 election in the member’s state or district minus Clinton’s
 
 
@@ -70,7 +75,6 @@ Creating the dataframes. I seperated out the polititians and the bills.
 averages$state <- as.factor(averages$state)
 levels(averages$state)
 
-#averages$agree_pct <- as.factor(averages$agree_pct)
 
 avg_pct_vote_by_state <- ggplot(averages, aes(state, agree_pct)) + geom_bar(stat="identity", width=.25, color="purple") +  theme(axis.text.x = element_text(angle = 45)) + ggtitle("state vs. agree percentage") + ylab("agree percentage")
 avg_pct_vote_by_state
@@ -86,13 +90,3 @@ agree_vs_predicted_agree
 
 ```
 Visualizing the agree percentage with the predicted agree. As you can see, most congress members voted how they were predicted but there are a few outlers. Several in the bottom right of the graph were predicted to agree over 75% of the time but ended up only agreeing less than 25% of the time. Repubicans are Red and Democrats are blue. Need to get Independants showing as a third color but currently they're showing as blue. Fortunatly there are not very many of them.
-
-
-7. Research questions to explore:
-
-Were congress people who voted strongly with trump in the 115th congress more or less likely to be elected to the 116th congress than people who voted against him before?
-
-Were senators or house members more likely to vote with Trump?
-
-Is there a geographical corelation between which states vote with/against Trump? I'm sure there is
-

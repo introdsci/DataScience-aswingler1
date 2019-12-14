@@ -3,6 +3,7 @@ library("tidyverse")
 library("rvest")
 library("dplyr")
 library("knitr")
+library("caret")
 
 purl("deliverable1.Rmd", output = "part1.r") # produces r source from rmd
 source("part1.r") # executes the source
@@ -98,10 +99,6 @@ politition_with_generation$Name <- gsub("\\,.*","", politition_with_generation$N
 colnames(politition_with_generation)[colnames(politition_with_generation) == "Name"] <- "last_name"
 
 #replacing the generation number in politician with the number from politition_with_generation
-
-#which(politician$last_name=="Clarke")
-#gets the row number. had to use since search wont show the actual row number.
-
 politician[4,"generation"]=2
 politician[5,"generation"]=2
 politician[6,"generation"]=2
@@ -325,14 +322,8 @@ averages <- add_column(averages, politician$generation)
 colnames(averages)[colnames(averages) == "politician$generation"] <- "generation"
 
 
+averages$generation <- as.factor(averages$generation)
 
- averages$generation <- as.factor(averages$generation)
-# levels(averages$generation)
-# 
-# averages$agree_pct <- as.factor(averages$agree_pct)
-# levels(averages$agree_pct)
-
-# avg_pct_vote_by_gen <- ggplot(averages, aes(generation, agree_pct)) + geom_bar(stat="identity", width=.5, color="green") + theme(axis.text.x = element_text(angle = 0))
 avg_pct_vote_by_gen <- ggplot(averages, aes(x=generation, y=agree_pct)) + stat_summary(fun.y="mean", geom="bar", color="green") + ylab("agree percentage") +ggtitle("politician generation vs. agree percentage")
 avg_pct_vote_by_gen
 
@@ -359,6 +350,6 @@ summary(trained_model)
 
 
 generation_agree_predictions <- predict(trained_model, test)
-ggplot(data=test, aes(generation_agree_predictions, generation)) + geom_point(color='purple')
+ggplot(data=test, aes(generation_agree_predictions, generation)) + geom_point(color='purple') + xlab('generation agree predictions')
 
 

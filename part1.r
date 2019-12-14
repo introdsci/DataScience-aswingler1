@@ -31,7 +31,6 @@ bill <-tibble(bill_id=vote_predictions$bill_id, roll_id=vote_predictions$roll_id
 averages$state <- as.factor(averages$state)
 levels(averages$state)
 
-#averages$agree_pct <- as.factor(averages$agree_pct)
 
 avg_pct_vote_by_state <- ggplot(averages, aes(state, agree_pct)) + geom_bar(stat="identity", width=.25, color="purple") +  theme(axis.text.x = element_text(angle = 45)) + ggtitle("state vs. agree percentage") + ylab("agree percentage")
 avg_pct_vote_by_state
