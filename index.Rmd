@@ -1,5 +1,5 @@
 ---
-title: "Predicting Politicians Agreement with Trump"
+title: "Predicting Politicians Agreement With Trump"
 subtitle: "Albert Swingler's Data Science Portfolio"
 output:
   html_document:
@@ -18,7 +18,7 @@ https://introdsci.github.io/DataScience-aswingler1/deliverable1.nb.html
 
 ### 2. Model Planning and Building
 
-For this phased I found data on how many generations each congressperson has been in the country and used that to predict how likely their vote was to align with Trump:
+For this phased I found data on how many generations each congressperson has been living in the country and used that to predict how likely their vote was to align with Trump:
 
 https://introdsci.github.io/DataScience-aswingler1/phase2.nb.html
 
@@ -35,4 +35,4 @@ I think my analysis of this data is very interesting despite not being very surp
 
 In the second phase of the project I decided to take a look at how each politicians likelyhood to vote for Trumps position is affected by how many generations they have lived in the United States. I proved that first generation immigrants were the least likely to vote with Trump and third generation and later politicians were the most likely to agree with him. It turns out that generation is a good predictor of of their votes.
 
-In the third phase of the project I looked at how the data can be used to inform and educate voters and what else could be done to continue this research.
+In the third phase of the project I looked at how the data can be used to inform and educate voters and what else could be done to continue this research. I also discussed some of the social and ethical implications of what I discovered.
